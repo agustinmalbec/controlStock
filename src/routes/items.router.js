@@ -29,7 +29,7 @@ itemRouter.post('/', async (req, res) => {
     try {
         const item = req.body;
         await itemController.addItem(item);
-        res.redirect('/stock');
+        res.redirect('/');
     } catch (error) {
         res.status(500).send(error);
     }
