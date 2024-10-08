@@ -20,7 +20,7 @@ app.use('/', viewsRouter);
 app.use('/api/items', itemRouter)
 
 app.listen(3000, () => {
-    console.log('Escuchando puerto 8080');
+    console.log('Escuchando puerto 3000');
 });
 mongoose.connect(environment.DB_LINK)
     .then(() => {
