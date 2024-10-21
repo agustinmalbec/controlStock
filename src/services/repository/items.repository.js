@@ -27,7 +27,7 @@ export default class ItemRepository {
 
     }
 
-    async deleteItem(id) {
-        return await this.service.deleteItem(id);
+    async deleteItem(code) {
+        return await this.service.deleteItem(code);
     }
 }

@@ -18,7 +18,7 @@ const itemSchema = new Schema({
         type: String,
         required: true,
     },
-    thumbnails: {
+    voucher: {
         type: Array,
         required: true,
         default: [],

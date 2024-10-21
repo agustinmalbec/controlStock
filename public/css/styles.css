@@ -1,0 +1,7 @@
+body{
+    background-image: url('/images/fondo.png');
+}
+
+img{
+    max-height: 70px;
+}

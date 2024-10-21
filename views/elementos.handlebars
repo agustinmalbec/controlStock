@@ -1,0 +1,23 @@
+<h3>Elementos</h3>
+<div class="container d-flex flex-wrap text-center">
+  {{#each items}}
+    <div class="g-col-6">
+      <div class="card" style="width: 14rem; ">
+        <div class="card-body">
+          <h3 class="card-title">{{title}}</h3>
+          <p>DNI: </p>
+          <p>Rol: </p>
+          <form action="/api/users/role/{{dni}}" method="post">
+            <button type="submit" class="btn btn-outline-primary">Cambiar de rol</button>
+          </form>
+          <form action="/api/items/{{code}}" method="post">
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+            >Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

@@ -25,7 +25,7 @@ export default class itemService {
         return await this.model.updateOne({ code: code }, item);
     }
 
-    async deleteItem(id) {
-        return await this.model.deleteOne({ _id: id });
+    async deleteItem(code) {
+        return await this.model.deleteOne({ code: code });
     }
 }

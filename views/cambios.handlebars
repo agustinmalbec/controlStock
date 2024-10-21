@@ -8,6 +8,7 @@
         <th scope="col">Descripcion</th>
         <th scope="col">Categoria</th>
         <th scope="col">Operario</th>
+        <th scope="col">Agregar nota</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
           <td>{{description}}</td>
           <td>{{itemCategory}}</td>
           <td>{{user}}</td>
+          <td><form action="" method="post">
+              <input type="text" />
+              <button type="submit">Agregar</button>
+            </form></td>
         </tr>
       {{/each}}
     </tbody>

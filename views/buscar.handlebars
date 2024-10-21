@@ -1,5 +1,5 @@
 <div class="container">
-  <form method="get" action="/search">
+  <form method="get" action="/buscar">
     <div class="mb-3">
       <label for="code" class="form-label">Codigo</label>
       <input
@@ -25,8 +25,9 @@
       <select name="category" id="category">
         <option value=""></option>
         <option value="Materiales">Materiales</option>
-        <option value="Sanitarios">Sanitarios</option>
-        <option value="Cocina">Cocina</option>
+        <option value="Electricidad">Electricidad</option>
+        <option value="Sanitario">Sanitario</option>
+        <option value="Seguridad">Seguridad</option>
       </select>
     </div>
     <div class="col-auto">
@@ -44,26 +45,40 @@
           <th scope="col">Nombre</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Categoria</th>
+          <th scope="col">Facturas</th>
           <th scope="col">Stock</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        {{#each items}}
-          <tr>
-            <td>{{code}}</td>
-            <td>{{title}}</td>
-            <td>{{description}}</td>
-            <td>{{category}}</td>
-            <td>
-              <form action="/api/items/{{code}}" method="post">
-                <label for="user">Operario</label>
-                <input type="text" name="user" />
-                <input type="number" value="{{stock}}" name="stock" />
-                <button type="submit">Cambiar stock</button>
-              </form>
-            </td>
-          </tr>
-        {{/each}}
+        <tbody>
+          {{#each items}}
+            <tr>
+              <td>{{code}}</td>
+              <td>{{title}}</td>
+              <td>{{description}}</td>
+              <td>{{category}}</td>
+              <td>{{#each voucher}}
+                  <a href="{{path}}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{path}}" alt="" />
+                  </a>
+
+                {{/each}}</td>
+
+              <td>
+                <form action="/api/items/{{code}}" method="post">
+                  <input type="number" value="{{stock}}" name="stock" />
+                  <button type="submit">Cambiar stock</button>
+                </form>
+              </td>
+              <td>
+                <form action="/api/items/delete/{{code}}" method="post">
+                  <button type="submit">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
       </tbody>
     </table>
   {{else}}

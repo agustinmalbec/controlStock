@@ -69,9 +69,9 @@ class ItemController {
         }
     }
 
-    async deleteItem(itemId) {
+    async deleteItem(code) {
         try {
-            return await this.controller.deleteItem(itemId)
+            return await this.controller.deleteItem(code)
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
         }

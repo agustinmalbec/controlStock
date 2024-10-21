@@ -1,0 +1,21 @@
+<h3>Operarios</h3>
+<div class="container d-flex flex-wrap text-center">
+  {{#each users}}
+    <div class="g-col-6">
+      <div class="card" style="width: 18rem; ">
+        <div class="card-body">
+          <h3 class="card-title">{{first_name}} {{last_name}}</h3>
+          <p>DNI: {{dni}}</p>
+          <p>Rol: {{role}}</p>
+          <form action="/api/users/role/{{dni}}" method="post">
+            <button type="submit" class="btn btn-outline-primary">Cambiar de rol</button>
+          </form>
+          <form action="/api/users/{{dni}}" method="post">
+            <button type="submit" class="btn btn-outline-primary">Eliminar
+              operario</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
