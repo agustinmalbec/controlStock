@@ -31,9 +31,11 @@ itemRouter.post('/', upload.single('voucher'), async (req, res) => {
         const item = req.body;
         const file = req.file;
         item.voucher = []
-        const path = file.path.replace('public\\', '');
-        file.path = path;
-        item.voucher.push(file);
+        if (file) {
+            const path = file.path.replace("public\\", '');
+            file.path = path;
+            item.voucher.push(file);
+        }
         await itemController.addItem(item);
         res.redirect('/');
     } catch (error) {
