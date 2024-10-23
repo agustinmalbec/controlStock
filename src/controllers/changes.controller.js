@@ -36,6 +36,15 @@ class ChangesController {
             console.log(`Ha ocurrido un error: ${error}`);
         }
     }
+
+    async update(itemCode, update) {
+        try {
+            return await this.controller.update(itemCode, update);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
 }
 
 const changesController = new ChangesController();

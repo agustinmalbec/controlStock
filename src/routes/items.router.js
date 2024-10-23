@@ -3,7 +3,11 @@ import itemController from "../controllers/items.controller.js";
 import changesController from "../controllers/changes.controller.js";
 import { middlewarePassportJWT } from "../middleware/jwt.middleware.js";
 import { upload } from "../middleware/multer.middleware.js";
-import userController from "../controllers/users.controller.js";
+import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import initialize from '../utils/firebase.js'
+
+initialize;
+const storage = getStorage();
 
 const itemRouter = Router();
 
@@ -26,14 +30,21 @@ itemRouter.post('/search', async (req, res) => {
     }
 });
 
+
 itemRouter.post('/', upload.single('voucher'), async (req, res) => {
     try {
         const item = req.body;
         const file = req.file;
         item.voucher = []
+
         if (file) {
-            const path = file.path.replace("public\\", '');
-            file.path = path;
+            const storageRef = ref(storage, `facturas/${req.file.originalname}`);
+            const metadata = {
+                contentType: req.file.mimetype,
+            };
+            const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+            file.path = downloadURL;
             item.voucher.push(file);
         }
         await itemController.addItem(item);

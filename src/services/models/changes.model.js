@@ -6,7 +6,11 @@ const changesSchema = new Schema({
     itemName: String,
     itemCode: String,
     itemCategory: String,
-    description: String
+    description: String,
+    notes: {
+        type: Array,
+        default: []
+    },
 });
 
 const changesModel = model('changes', changesSchema);

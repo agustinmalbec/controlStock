@@ -38,10 +38,12 @@ viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
 viewsRouter.get('/cambios', middlewarePassportJWT, isAuth, async (req, res) => {
     try {
         const data = await changesController.getChanges();
+        const user = req.user;
 
         res.render('cambios', {
             title: 'Cambios',
-            data: data
+            data: data,
+            user
         });
     } catch (error) {
         res.status(500).send(error);

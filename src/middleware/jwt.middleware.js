@@ -23,18 +23,15 @@ const authToken = (req, res, next) => {
 
 const middlewarePassportJWT = async (req, res, next) => {
     passport.authenticate('current', { session: false }, (err, usr, info) => {
-
         if (err) {
             next(err);
         }
-
         if (!usr) {
             res.redirect('/login');
         } else {
             req.user = usr;
             next();
         }
-
     })(req, res, next);
 };
 

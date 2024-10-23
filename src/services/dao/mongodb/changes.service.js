@@ -14,10 +14,14 @@ export default class changesService {
     }
 
     async getByUser(user) {
-        return await this.model.find(user);
+        return await this.model.findOne(user);
     }
 
-    async getByItem(itemCode) {
-        return await this.model.find(itemCode);
+    async getByItem(code) {
+        return await this.model.findOne({ itemCode: code });
+    }
+
+    async update(code, update) {
+        return await this.model.findOneAndUpdate({ itemCode: code }, update);
     }
 };

@@ -8,6 +8,7 @@
         <th scope="col">Descripcion</th>
         <th scope="col">Categoria</th>
         <th scope="col">Operario</th>
+        <th scope="col">Notas</th>
         <th scope="col">Agregar nota</th>
       </tr>
     </thead>
@@ -20,8 +21,11 @@
           <td>{{description}}</td>
           <td>{{itemCategory}}</td>
           <td>{{user}}</td>
-          <td><form action="" method="post">
-              <input type="text" />
+          <td class="max-width: 200px;">{{#each notes}}(Operario:{{Operario}},
+              Nota:{{Nota}}){{/each}}</td>
+          <td><form action="/api/changes" method="post">
+              <input type="hidden" value="{{itemCode}}" name="itemCode" />
+              <input type="text" name="note" />
               <button type="submit">Agregar</button>
             </form></td>
         </tr>

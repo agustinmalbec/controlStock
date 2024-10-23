@@ -21,4 +21,8 @@ export default class ChangesRepository {
     async getByItem(itemCode) {
         return await this.service.getByItem(itemCode);
     }
+
+    async update(itemCode, update) {
+        return await this.service.update(itemCode, update);
+    }
 };
