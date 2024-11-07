@@ -1,0 +1,29 @@
+<div class="container">
+  <form action="/api/items" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="supplier" class="form-label">Proveedor</label>
+      <input type="text" name="supplier" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Nombre</label>
+      <input type="text" name="title" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripcion</label>
+      <input type="text" name="description" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Categoria</label>
+      <input type="text" name="category" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="number" name="stock" class="form-control" required />
+    </div>
+    <label for="image">Comprobante</label>
+    <input type="file" name="voucher" id="voucher" />
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Cargar</button>
+    </div>
+  </form>
+</div>

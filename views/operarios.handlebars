@@ -1,0 +1,54 @@
+<h3>Operarios</h3>
+
+<div class="container">
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Cambiar cargo</th>
+        <th scope="col">Cambiar contraseña</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {{#each users}}
+          <tr>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+            <td>{{dni}}</td>
+            <td>{{role}}</td>
+            <td>
+              <form action="/api/users/role/{{_id}}" method="post">
+                <button type="submit" class="btn btn-outline-primary">Cambiar
+                  cargo</button>
+              </form>
+            </td>
+            <td>
+              <form action="/api/users/password/{{_id}}" method="post">
+                <input
+                  type="text"
+                  placeholder="Contraseña"
+                  aria-label="Contraseña"
+                  name="password"
+                  class="form-control"
+                />
+                <button type="submit" class="btn btn-outline-primary">Cambiar
+                  contraseña</button>
+              </form>
+            </td>
+            <td>
+              <form action="/api/users/{{_id}}" method="post">
+                <button type="submit" class="btn btn-outline-primary">Eliminar
+                  operario</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </tbody>
+  </table>
+</div>

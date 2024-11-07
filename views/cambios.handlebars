@@ -1,0 +1,45 @@
+<div class="container">
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Operario</th>
+        <th scope="col">Notas</th>
+        <th scope="col">Agregar nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{supplier}}</td>
+          <td>{{itemName}}</td>
+          <td>{{description}}</td>
+          <td>{{itemCategory}}</td>
+          <td>{{user}}</td>
+          <td class="max-width: 200px;">{{#each notes}}{{Operario}}:
+              {{Nota}}<br />{{/each}}</td>
+          <td><form action="/api/changes" method="post">
+              <input type="hidden" value="{{_id}}" name="id" />
+              <input type="text" name="note" />
+              <button type="submit">Agregar</button>
+            </form></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    {{#if (gt page 1)}}
+      <a class="page-link" href="/cambios?page={{subtract page 1}}">Anterior</a>
+    {{/if}}
+
+    {{#if (lt page totalPages)}}
+      <a class="page-link" href="/cambios?page={{add page 1}}">Siguiente</a>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+  <form method="get" action="/buscar">
+    <div class="mb-3">
+      <label for="supplier" class="form-label">Proveedor</label>
+      <input type="text" name="supplier" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Nombre</label>
+      <input type="text" name="title" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Categoria</label>
+      <input type="text" name="category" class="form-control" />
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  {{#if data.length}}
+    <table class="table table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col">Proveedor</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Facturas</th>
+          <th scope="col">Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tbody>
+          {{#each data}}
+            <tr>
+              <td>{{supplier}}</td>
+              <td>{{title}}</td>
+              <td>{{description}}</td>
+              <td>{{category}}</td>
+              <td>{{#each voucher}}
+                  <a href="{{path}}" target="_blank" rel="noopener noreferrer">
+                    <button type="submit" class="btn btn-primary">LINK</button>
+                  </a>
+                {{/each}}</td>
+              <td>
+                <form action="/api/items/{{_id}}" method="post">
+                  <input type="number" value="{{stock}}" name="stock" />
+                  <button type="submit">Cambiar stock</button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </tbody>
+    </table>
+  {{else}}
+    <p>No se encontraron productos.</p>
+  {{/if}}
+
+  <div class="pagination">
+    {{#if (gt page 1)}}
+      <a
+        class="page-link"
+        href="/buscar?page={{subtract
+          page
+          1
+        }}&supplier={{supplier}}&title={{title}}&description={{description}}&category={{category}}"
+      >Anterior</a>
+    {{/if}}
+
+    {{#if (lt page totalPages)}}
+      <a
+        class="page-link"
+        href="/buscar?page={{add
+          page
+          1
+        }}&supplier={{supplier}}&title={{title}}&description={{description}}&category={{category}}"
+      >Siguiente</a>
+    {{/if}}
+  </div>
+</div>

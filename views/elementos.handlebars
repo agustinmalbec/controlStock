@@ -1,0 +1,153 @@
+<h3>Elementos</h3>
+<div class="container">
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Facturas</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {{#each data}}
+          <tr>
+            <td>{{supplier}}</td>
+            <td>{{title}}</td>
+            <td>{{description}}</td>
+            <td>{{category}}</td>
+            <td>{{#each voucher}}
+                <a href="{{path}}" target="_blank" rel="noopener noreferrer">
+                  <button type="submit" class="btn btn-primary">LINK</button>
+                </a>
+              {{/each}}</td>
+            <td>{{stock}}
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#{{_id}}"
+              >
+                Editar
+              </button>
+              <div
+                class="modal fade"
+                id="{{_id}}"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title fs-5">{{title}}</h4>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <form
+                        action="/api/items/update/{{_id}}"
+                        method="post"
+                        enctype="multipart/form-data"
+                      >
+                        <div class="mb-3">
+                          <label
+                            for="supplier"
+                            class="form-label"
+                          >Proveedor</label>
+                          <input
+                            type="text"
+                            name="supplier"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="title" class="form-label">Nombre</label>
+                          <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label
+                            for="description"
+                            class="form-label"
+                          >Descripcion</label>
+                          <input
+                            type="text"
+                            name="description"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label
+                            for="category"
+                            class="form-label"
+                          >Categoria</label>
+                          <input
+                            type="text"
+                            name="category"
+                            class="form-control"
+                          />
+                        </div>
+                        <label for="voucher">Comprobante</label>
+                        <input type="file" name="voucher" id="voucher" />
+                        <div class="col-auto modal-footer">
+                          <button
+                            type="submit"
+                            class="btn btn-primary mb-3"
+                          >Editar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <form action="/api/items/delete/{{_id}}" method="post">
+                <button
+                  type="submit"
+                  class="btn btn-outline-primary"
+                >Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </tbody>
+  </table>
+  <div class="pagination">
+    {{#if (gt page 1)}}
+      <a
+        class="page-link"
+        href="/elementos?page={{subtract
+          page
+          1
+        }}"
+      >Anterior</a>
+    {{/if}}
+
+    {{#if (lt page totalPages)}}
+      <a
+        class="page-link"
+        href="/elementos?page={{add
+          page
+          1
+        }}"
+      >Siguiente</a>
+    {{/if}}
+  </div>
+</div>
+</div>
