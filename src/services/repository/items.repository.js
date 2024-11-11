@@ -32,7 +32,6 @@ export default class ItemRepository {
 
     async updateItem(id, item) {
         return await this.service.updateItem(id, item);
-
     }
 
     async deleteItem(id) {

@@ -56,18 +56,10 @@ class ItemController {
 
     async addItem(item, user) {
         try {
-            const search = await this.controller.getItemByTitle(item.title);
-            const items = await this.controller.getItems();
-            if (search !== null) {
-                for (const i of items) {
-                    if (item.supplier == i.supplier && item.title == i.title) {
-                        return console.log("El campo id se encuentra repetido");
-                    }
-                }
-            }
             const description = `${user.first_name} agrego ${item.title}`;
             const added = await this.controller.addItem(item);
             await changesController.addChange(user, description, added);
+            return added;
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
         }

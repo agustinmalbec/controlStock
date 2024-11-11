@@ -1,6 +1,14 @@
 import { Schema, model } from "mongoose";
 
 const itemSchema = new Schema({
+    order: {
+        type: Number,
+        required: true,
+    },
+    remito: {
+        type: Number,
+        required: true,
+    },
     supplier: {
         type: String,
         required: true,
@@ -9,23 +17,9 @@ const itemSchema = new Schema({
         type: String,
         required: true,
     },
-    category: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    voucher: {
-        type: Array,
-        required: true,
-        default: [],
-    },
-    stock: {
-        type: Number,
-        required: true,
-    }
+    description: String,
+    stock: Number,
+    initialStock: Number
 });
 
 const itemModel = model('items', itemSchema);

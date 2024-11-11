@@ -5,6 +5,7 @@ import { middlewarePassportJWT } from "../middleware/jwt.middleware.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import initialize from '../utils/firebase.js';
+import purchaseController from "../controllers/purchase.controller.js";
 
 initialize;
 const storage = getStorage();
@@ -31,25 +32,29 @@ itemRouter.post('/search', async (req, res) => {
 });
 
 
-itemRouter.post('/', upload.single('voucher'), middlewarePassportJWT, async (req, res) => {
+itemRouter.post('/', middlewarePassportJWT, async (req, res) => {
     try {
         const user = req.user;
-        const item = req.body;
-        const file = req.file;
-        item.voucher = [];
+        const it = req.body;
+        const order = await purchaseController.getPurchaseByOrder(it.order);
 
-        if (file) {
-            const storageRef = ref(storage, `facturas/${req.file.originalname}`);
-            const metadata = {
-                contentType: req.file.mimetype,
-            };
-            const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
-            const downloadURL = await getDownloadURL(snapshot.ref);
-            file.path = downloadURL;
-            item.voucher.push(file);
-        }
+        /*  const file = req.file;
+         item.voucher = [];
+ 
+         if (file) {
+             const storageRef = ref(storage, `facturas/${req.file.originalname}`);
+             const metadata = {
+                 contentType: req.file.mimetype,
+             };
+             const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+             const downloadURL = await getDownloadURL(snapshot.ref);
+             file.path = downloadURL;
+             item.voucher.push(file);
+         } */
 
-        await itemController.addItem(item, user);
+        const item = await itemController.addItem(it, user);
+        order.items.push(item);
+        await purchaseController.updatePurchase(order._id, order);
         res.redirect('/');
     } catch (error) {
         res.status(500).send(error);

@@ -1,0 +1,142 @@
+<div class="container">
+  <div>
+    <form action="/api/purchases" method="post">
+      <div class="mb-3">
+        <label for="order" class="form-label">Numero de orden</label>
+        <input type="text" name="order" class="form-control" required />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <table class="table table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col">Numero de orden</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <td>{{order}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{order}}">
+              ▼
+            </button>
+            <div class="modal fade" id="{{order}}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title fs-5"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th scope="col">Numero de orden</th>
+                          <th scope="col">Remito</th>
+                          <th scope="col">Proveedor</th>
+                          <th scope="col">Material</th>
+                          <th scope="col">Stock</th>
+                          <th scope="col">Stock inicial</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each items}}
+                        <tr>
+                          <td>
+                            {{order}}
+                          </td>
+                          <td>
+                            {{remito}}
+                          </td>
+                          <td>
+                            {{supplier}}
+                          </td>
+                          <td>
+                            {{title}}
+                          </td>
+                          <td>
+                            {{stock}}
+                          </td>
+                          <td>
+                            {{initialStock}}
+                          </td>
+                          
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+              Agregar factura
+            </button>
+            <div class="modal fade" id="{{_id}}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/api/purchases/update/{{_id}}" method="post">
+                      <div class="mb-3">
+                        <label for="remito" class="form-label">Remito</label>
+                        <input type="text" name="remito" class="form-control" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="supplier" class="form-label">Proveedor</label>
+                        <input type="text" name="supplier" class="form-control" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="title" class="form-label">Material</label>
+                        <input type="text" name="title" class="form-control" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="initialStock" class="form-label">Stock inicial</label>
+                        <input type="number" name="initialStock" class="form-control" required />
+                      </div>
+                      <div class="col-auto modal-footer">
+                        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <form action="/api/purchases/delete/{{_id}}" method="post">
+              <button type="submit" class="btn btn-outline-primary">Eliminar orden</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+      </tbody>
+    </table>
+    <div class="pagination">
+      {{#if (gt page 1)}}
+      <a class="page-link" href="/elementos?page={{subtract
+          page
+          1
+        }}">Anterior</a>
+      {{/if}}
+
+      {{#if (lt page totalPages)}}
+      <a class="page-link" href="/elementos?page={{add
+          page
+          1
+        }}">Siguiente</a>
+      {{/if}}
+    </div>
+  </div>

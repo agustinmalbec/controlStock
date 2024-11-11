@@ -12,6 +12,7 @@ import itemRouter from "./routes/items.router.js";
 import userRouter from "./routes/users.router.js";
 import environment from './config/environment.config.js';
 import changesRouter from "./routes/changes.router.js";
+import purchaseRouter from "./routes/purchase.router.js";
 
 const app = express();
 app.use(express.json());
@@ -47,6 +48,7 @@ app.use('/', viewsRouter);
 app.use('/api/items', itemRouter);
 app.use('/api/users', userRouter);
 app.use('/api/changes', changesRouter);
+app.use('/api/purchases', purchaseRouter);
 
 app.listen(3000, () => {
     console.log('Escuchando puerto 3000');

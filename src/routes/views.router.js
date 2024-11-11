@@ -4,18 +4,14 @@ import userController from "../controllers/users.controller.js";
 import changesController from "../controllers/changes.controller.js";
 import { middlewarePassportJWT } from "../middleware/jwt.middleware.js";
 import { isAdmin, isAuth, isSupervisor } from "../middleware/auth.middleware.js";
+import purchaseController from "../controllers/purchase.controller.js";
 
 const viewsRouter = Router();
 
 viewsRouter.get('/', middlewarePassportJWT, isAuth, isSupervisor, async (req, res) => {
     try {
-        const user = req.user;
-        const data = await itemController.getItems();
-
-        res.render('stock', {
-            title: 'Items',
-            data: data,
-            user
+        res.render('facturas', {
+            title: 'Cargar factura'
         });
     } catch (error) {
         res.status(500).send(error);
@@ -97,6 +93,22 @@ viewsRouter.get('/elementos', middlewarePassportJWT, isAdmin, async (req, res) =
         res.render('elementos', {
             title: 'Administrador',
             data,
+            page: cp,
+            totalPages
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/ordenes', async (req, res) => {
+    try {
+        const { page = 1 } = req.query;
+        const limit = 10;
+        const { data, totalPages, currentPage } = await purchaseController.getPurchases(page, limit);
+        const cp = Number(currentPage);
+        res.render('ordenes', {
+            title: 'Ordenes', orders: data,
             page: cp,
             totalPages
         });
