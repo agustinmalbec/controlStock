@@ -1,22 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const itemSchema = new Schema({
-    order: {
-        type: String,
-        required: true,
-    },
-    remito: {
-        type: Number,
-        required: true,
-    },
-    supplier: {
-        type: String,
-        required: true,
-    },
-    title: {
-        type: String,
-        required: true,
-    },
+    order: String,
+    remito: Number,
+    supplier: String,
+    title: String,
     description: String,
     stock: Number,
     initialStock: Number
