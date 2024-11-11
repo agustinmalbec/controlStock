@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const itemSchema = new Schema({
     order: {
-        type: Number,
+        type: String,
         required: true,
     },
     remito: {
