@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const purchaseSchema = new Schema({
     order: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
