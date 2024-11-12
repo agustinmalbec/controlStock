@@ -36,22 +36,10 @@ itemRouter.post('/', middlewarePassportJWT, async (req, res) => {
     try {
         const user = req.user;
         const it = req.body;
-        const order = await purchaseController.getPurchaseByOrder(it.order);
-
-        /*  const file = req.file;
-         item.voucher = [];
- 
-         if (file) {
-             const storageRef = ref(storage, `facturas/${req.file.originalname}`);
-             const metadata = {
-                 contentType: req.file.mimetype,
-             };
-             const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
-             const downloadURL = await getDownloadURL(snapshot.ref);
-             file.path = downloadURL;
-             item.voucher.push(file);
-         } */
-
+        let order = await purchaseController.getPurchaseByOrder(it.order);
+        if (order === null) {
+            order = await purchaseController.addPurchase({ order: it.order });
+        }
         const item = await itemController.addItem(it, user);
         order.items.push(item);
         await purchaseController.updatePurchase(order._id, order);

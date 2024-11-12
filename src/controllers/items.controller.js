@@ -45,9 +45,9 @@ class ItemController {
         }
     }
 
-    async getItemBySupplier(supplier) {
+    async getItem(order, title, supplier) {
         try {
-            return await this.controller.getItemBySupplier(supplier);
+            return await this.controller.getItem(order, title, supplier);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
         }
@@ -56,7 +56,21 @@ class ItemController {
 
     async addItem(item, user) {
         try {
+
             const description = `${user.first_name} agrego ${item.title}`;
+            const find = await this.controller.getItem(item.order, item.title, item.supplier);
+            if (find.length == 0) {
+                item.actualStock = item.initialStock;
+            }
+            if (find.length > 0) {
+                item.actualStock = find[0].actualStock;
+                item.actualStock = item.actualStock - item.stock;
+                for (const element of find) {
+                    element.actualStock = item.actualStock;
+                    await this.controller.updateItem(element._id, element);
+                }
+            }
+
             const added = await this.controller.addItem(item);
             await changesController.addChange(user, description, added);
             return added;

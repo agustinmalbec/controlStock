@@ -26,8 +26,8 @@ export default class ItemRepository {
         return await this.service.getItemByTitle({ title });
     }
 
-    async getItemBySupplier(supplier) {
-        return await this.service.getItemBySupplier({ supplier });
+    async getItem(order, title, supplier) {
+        return await this.service.getItem(order, title, supplier);
     }
 
     async updateItem(id, item) {

@@ -1,16 +1,5 @@
 <div class="container">
   <div>
-    <form action="/api/purchases" method="post">
-      <div class="mb-3">
-        <label for="order" class="form-label">Numero de orden</label>
-        <input type="text" name="order" class="form-control" required />
-      </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
-      </div>
-    </form>
-  </div>
-  <div>
     <table class="table table-striped-columns">
       <thead>
         <tr>
@@ -42,8 +31,9 @@
                           <th scope="col">Remito</th>
                           <th scope="col">Proveedor</th>
                           <th scope="col">Material</th>
-                          <th scope="col">Stock</th>
+                          <th scope="col">Ingreso</th>
                           <th scope="col">Stock inicial</th>
+                          <th scope="col">Restan</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -67,7 +57,9 @@
                           <td>
                             {{initialStock}}
                           </td>
-                          
+                          <td>
+                            {{actualStock}}
+                          </td>
                         </tr>
                         {{/each}}
                       </tbody>

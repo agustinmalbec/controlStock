@@ -10,8 +10,8 @@ const viewsRouter = Router();
 
 viewsRouter.get('/', middlewarePassportJWT, isAuth, isSupervisor, async (req, res) => {
     try {
-        res.render('facturas', {
-            title: 'Cargar factura'
+        res.render('carga', {
+            title: 'Cargar'
         });
     } catch (error) {
         res.status(500).send(error);
@@ -107,8 +107,8 @@ viewsRouter.get('/ordenes', async (req, res) => {
         const limit = 10;
         const { data, totalPages, currentPage } = await purchaseController.getPurchases(page, limit);
         const cp = Number(currentPage);
-        res.render('ordenes', {
-            title: 'Ordenes', orders: data,
+        res.render('resultados', {
+            title: 'Resultados', orders: data,
             page: cp,
             totalPages
         });

@@ -41,8 +41,8 @@ export default class itemService {
         return await this.model.findOne(title);
     }
 
-    async getItemBySupplier(supplier) {
-        return await this.model.findOne(supplier);
+    async getItem(order, title, supplier) {
+        return await this.model.find({ order: order, title: title, supplier: supplier });
     }
 
     async updateItem(id, item) {

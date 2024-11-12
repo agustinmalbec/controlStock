@@ -7,6 +7,7 @@ const itemSchema = new Schema({
     title: String,
     description: String,
     stock: Number,
+    actualStock: Number,
     initialStock: Number
 });
 
