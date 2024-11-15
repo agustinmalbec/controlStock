@@ -43,7 +43,7 @@ itemRouter.post('/', middlewarePassportJWT, async (req, res) => {
         const item = await itemController.addItem(it, user);
         order.items.push(item);
         await purchaseController.updatePurchase(order._id, order);
-        res.redirect('/');
+        res.redirect('back');
     } catch (error) {
         res.status(500).send(error);
     }

@@ -1,18 +1,7 @@
 <div class="container">
-  {{! <div>
-    <form action="/api/purchases" method="post">
-      <div class="mb-3">
-        <label for="order" class="form-label">Numero de orden</label>
-        <input type="text" name="order" class="form-control" required />
-      </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
-      </div>
-    </form>
-  </div> }}
   <div>
     <form action="/api/items" method="post">
-      <div class="mb-3">
+      {{! <div class="mb-3">
         <label for="order" class="form-label">Orden</label>
         <input type="text" name="order" class="form-control" />
       </div>
@@ -27,15 +16,42 @@
       <div class="mb-3">
         <label for="title" class="form-label">Material</label>
         <input type="text" name="title" class="form-control" />
+      </div> }}
+      <input
+        type="text"
+        name="order"
+        class="form-control"
+        value="{{order}}"
+        hidden
+      />
+      <div class="mb-3">
+        <label for="remito" class="form-label">Remito</label>
+        <input type="text" name="remito" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="supplier" class="form-label">Proveedor</label>
+        <select name="supplier">
+          {{#each suppliers}}
+            <option value="{{supplier}}">{{supplier}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Material</label>
+        <select name="title">
+          {{#each material}}
+            <option value="{{title}}">{{title}}</option>
+          {{/each}}
+        </select>
       </div>
       <div class="mb-3">
         <label for="stock" class="form-label">Ingreso</label>
         <input type="number" name="stock" class="form-control" />
       </div>
-      <div class="mb-3">
+      {{! <div class="mb-3">
         <label for="initialStock" class="form-label">Compra inicial</label>
         <input type="number" name="initialStock" class="form-control" />
-      </div>
+      </div> }}
       <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">Cargar</button>
       </div>

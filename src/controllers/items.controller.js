@@ -61,6 +61,7 @@ class ItemController {
             const find = await this.controller.getItem(item.order, item.title, item.supplier);
             if (find.length == 0) {
                 item.actualStock = item.initialStock;
+                item.isInitial = true;
             }
             if (find.length > 0) {
                 item.actualStock = find[0].actualStock;

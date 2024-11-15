@@ -8,7 +8,11 @@ const itemSchema = new Schema({
     description: String,
     stock: Number,
     actualStock: Number,
-    initialStock: Number
+    initialStock: Number,
+    isInitial: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const itemModel = model('items', itemSchema);

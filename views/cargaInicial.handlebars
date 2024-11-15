@@ -1,0 +1,29 @@
+<div class="container">
+  <div>
+    <form action="/api/items" method="post">
+      <div class="mb-3" hidden>
+        <input
+          type="text"
+          name="order"
+          class="form-control"
+          value="{{order}}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="supplier" class="form-label">Proveedor</label>
+        <input type="text" name="supplier" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Material</label>
+        <input type="text" name="title" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="initialStock" class="form-label">Compra inicial</label>
+        <input type="number" name="initialStock" class="form-control" />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
+      </div>
+    </form>
+  </div>
+</div>

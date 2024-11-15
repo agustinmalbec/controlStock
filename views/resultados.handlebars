@@ -1,5 +1,16 @@
 <div class="container">
   <div>
+    <form action="/api/purchases" method="post">
+      <div class="mb-3">
+        <label for="order" class="form-label">Numero de orden</label>
+        <input type="text" name="order" class="form-control" required />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Cargar orden nueva</button>
+      </div>
+    </form>
+  </div>
+  <div>
     <table class="table table-striped-columns">
       <thead>
         <tr>
@@ -70,8 +81,8 @@
             </div>
           </td>
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
-              Agregar factura
+            {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+              Cargar remito
             </button>
             <div class="modal fade" id="{{_id}}" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog">
@@ -104,7 +115,11 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
+            <button class="btn btn-outline-primary"><a href="/carga-remito/{{_id}}">Cargar remito</a></button>
+          </td>
+          <td>
+            <button class="btn btn-outline-primary"><a href="/carga-inicial/{{_id}}">Carga inicial de la orden</a></button>
           </td>
           <td>
             <form action="/api/purchases/delete/{{_id}}" method="post">

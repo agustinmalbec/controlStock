@@ -8,7 +8,7 @@ import purchaseController from "../controllers/purchase.controller.js";
 
 const viewsRouter = Router();
 
-viewsRouter.get('/', middlewarePassportJWT, isAuth, isSupervisor, async (req, res) => {
+/* viewsRouter.get('/', middlewarePassportJWT, isAuth, isSupervisor, async (req, res) => {
     try {
         res.render('carga', {
             title: 'Cargar'
@@ -16,7 +16,7 @@ viewsRouter.get('/', middlewarePassportJWT, isAuth, isSupervisor, async (req, re
     } catch (error) {
         res.status(500).send(error);
     }
-});
+}); */
 
 viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
     const { page = 1, supplier, title, category } = req.query;
@@ -111,6 +111,45 @@ viewsRouter.get('/ordenes', async (req, res) => {
             title: 'Resultados', orders: data,
             page: cp,
             totalPages
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/carga-inicial/:id', async (req, res) => {
+    try {
+        const order = await purchaseController.getPurchaseById(req.params.id);
+        const item = req.body;
+        item.order = order.order;
+        const supplierAux = order.items.map(supplier => ({ supplier: supplier.supplier }));
+        const supplier = [...new Set(supplierAux.map(JSON.stringify))].map(JSON.parse);
+        console.log(supplier);
+
+        res.render('cargaInicial', {
+            title: 'Carga inicial',
+            order: order.order
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/carga-remito/:id', async (req, res) => {
+    try {
+        const order = await purchaseController.getPurchaseById(req.params.id);
+        const item = req.body;
+        item.order = order.order;
+        const supplierAux = order.items.map(supplier => ({ supplier: supplier.supplier }));
+        const suppliers = [...new Set(supplierAux.map(JSON.stringify))].map(JSON.parse);
+        const materialrAux = order.items.map(material => ({ title: material.title }));
+        const material = [...new Set(materialrAux.map(JSON.stringify))].map(JSON.parse);
+
+        res.render('carga', {
+            title: 'Cargar remito',
+            order: order.order,
+            suppliers,
+            material
         });
     } catch (error) {
         res.status(500).send(error);
