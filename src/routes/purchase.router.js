@@ -27,8 +27,6 @@ purchaseRouter.post('/search', async (req, res) => {
 purchaseRouter.post('/', middlewarePassportJWT, async (req, res) => {
     try {
         const purchase = req.body;
-        console.log(purchase);
-
         await purchaseController.addPurchase(purchase);
         res.redirect('/');
     } catch (error) {

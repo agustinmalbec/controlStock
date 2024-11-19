@@ -16,13 +16,17 @@ class ItemController {
 
     async searchItems(item, page, limit) {
         try {
-            const { supplier, title, description, category } = item;
+            const { order, remito, supplier, title, type } = item;
             const search = {};
+            if (order) search.order = order;
+            if (remito) search.remito = remito;
             if (supplier) search.supplier = supplier;
-            if (title) search.title = title;
-            if (description) search.description = description;
-            if (category) search.category = category;
-
+            if (title) search.title = { $regex: title, $options: 'i' };
+            if (type) {
+                if (type == '');
+                if (type == 'order') search.isInitial = true;
+                if (type == 'remito') search.isInitial = false;
+            };
             return await this.controller.searchItems(search, page, limit);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);

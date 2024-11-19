@@ -19,8 +19,8 @@ const viewsRouter = Router();
 }); */
 
 viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
-    const { page = 1, supplier, title, category } = req.query;
-    const item = { supplier, title, category };
+    const { page = 1, order, remito, supplier, title, type } = req.query;
+    const item = { order, remito, supplier, title, type };
     const limit = 10;
     try {
         const { data, totalPages, currentPage } = await itemController.searchItems(item, page, limit);
@@ -30,9 +30,11 @@ viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
             data,
             page: cp,
             totalPages,
+            order,
+            remito,
             supplier,
             title,
-            category
+            type
         });
     } catch (error) {
         res.status(500).send(error);

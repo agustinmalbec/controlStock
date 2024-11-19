@@ -16,6 +16,14 @@
       <label for="title" class="form-label">Nombre</label>
       <input type="text" name="title" class="form-control" />
     </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Tipo</label>
+      <select name="type">
+        <option value="">Todos</option>
+        <option value="order">Carga inicial</option>
+        <option value="remito">Remito</option>
+      </select>
+    </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-primary mb-3">Buscar</button>
     </div>
@@ -24,7 +32,7 @@
 
 <div class="container">
   {{#if data.length}}
-    <table class="table table-striped-columns">
+    <table class="table table-striped-columns text-center">
       <thead>
         <tr>
           <th scope="col">Orden</th>
@@ -172,7 +180,7 @@
         href="/buscar?page={{subtract
           page
           1
-        }}&supplier={{supplier}}&title={{title}}&description={{description}}&category={{category}}"
+        }}&order={{order}}&remito={{remito}}&supplier={{supplier}}&title={{title}}&type={{type}}"
       >Anterior</a>
     {{/if}}
 
@@ -182,7 +190,7 @@
         href="/buscar?page={{add
           page
           1
-        }}&supplier={{supplier}}&title={{title}}&description={{description}}&category={{category}}"
+        }}&order={{order}}&remito={{remito}}&supplier={{supplier}}&title={{title}}&type={{type}}"
       >Siguiente</a>
     {{/if}}
   </div>

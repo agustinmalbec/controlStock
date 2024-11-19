@@ -71,9 +71,7 @@ itemRouter.post('/update/:id', /* upload.single('voucher'), */ middlewarePasspor
         const id = req.params.id;
         const { initialStock, remito, stock } = req.body;
         const item = await itemController.getItemById(id);
-
         const initialItem = await itemController.getSingleInitialItem(item.order, item.title, item.supplier);
-        console.log(initialItem);
 
         if (initialStock) {
             const initial = item.initialStock;
