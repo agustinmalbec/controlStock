@@ -30,6 +30,18 @@ export default class ItemRepository {
         return await this.service.getItem(order, title, supplier);
     }
 
+    async getInitialItem(order) {
+        return await this.service.getInitialItem(order);
+    }
+
+    async getSingleInitialItem(order, title, supplier) {
+        return await this.service.getSingleInitialItem(order, title, supplier);
+    }
+
+    async getStockItem(order) {
+        return await this.service.getStockItem(order);
+    }
+
     async updateItem(id, item) {
         return await this.service.updateItem(id, item);
     }

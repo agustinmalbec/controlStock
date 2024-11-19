@@ -24,98 +24,9 @@
         <tr>
           <td>{{order}}</td>
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{order}}">
-              ▼
-            </button>
-            <div class="modal fade" id="{{order}}" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title fs-5"></h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th scope="col">Numero de orden</th>
-                          <th scope="col">Remito</th>
-                          <th scope="col">Proveedor</th>
-                          <th scope="col">Material</th>
-                          <th scope="col">Ingreso</th>
-                          <th scope="col">Stock inicial</th>
-                          <th scope="col">Restan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{#each items}}
-                        <tr>
-                          <td>
-                            {{order}}
-                          </td>
-                          <td>
-                            {{remito}}
-                          </td>
-                          <td>
-                            {{supplier}}
-                          </td>
-                          <td>
-                            {{title}}
-                          </td>
-                          <td>
-                            {{stock}}
-                          </td>
-                          <td>
-                            {{initialStock}}
-                          </td>
-                          <td>
-                            {{actualStock}}
-                          </td>
-                        </tr>
-                        {{/each}}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button class="btn btn-outline-primary"><a href="/materiales-orden/{{_id}}">Ver orden</a></button>
           </td>
           <td>
-            {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
-              Cargar remito
-            </button>
-            <div class="modal fade" id="{{_id}}" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form action="/api/purchases/update/{{_id}}" method="post">
-                      <div class="mb-3">
-                        <label for="remito" class="form-label">Remito</label>
-                        <input type="text" name="remito" class="form-control" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="supplier" class="form-label">Proveedor</label>
-                        <input type="text" name="supplier" class="form-control"  />
-                      </div>
-                      <div class="mb-3">
-                        <label for="title" class="form-label">Material</label>
-                        <input type="text" name="title" class="form-control"/>
-                      </div>
-                      <div class="mb-3">
-                        <label for="initialStock" class="form-label">Stock inicial</label>
-                        <input type="number" name="initialStock" class="form-control" />
-                      </div>
-                      <div class="col-auto modal-footer">
-                        <button type="submit" class="btn btn-primary mb-3">Cargar</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div> --}}
             <button class="btn btn-outline-primary"><a href="/carga-remito/{{_id}}">Cargar remito</a></button>
           </td>
           <td>

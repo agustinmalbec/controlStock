@@ -66,18 +66,36 @@ itemRouter.post('/:id', middlewarePassportJWT, async (req, res) => {
     }
 });
 
-itemRouter.post('/update/:id', upload.single('voucher'), middlewarePassportJWT, async (req, res) => {
+itemRouter.post('/update/:id', /* upload.single('voucher'), */ middlewarePassportJWT, async (req, res) => {
     try {
         const id = req.params.id;
-        const file = req.file;
-        const { supplier, title, description, category } = req.body;
+        const { initialStock, remito, stock } = req.body;
         const item = await itemController.getItemById(id);
 
-        if (supplier) { item.supplier = supplier; }
-        if (title) { item.title = title; }
-        if (description) { item.description = description; }
-        if (category) { item.category = category; }
-        if (file) {
+        const initialItem = await itemController.getSingleInitialItem(item.order, item.title, item.supplier);
+        console.log(initialItem);
+
+        if (initialStock) {
+            const initial = item.initialStock;
+            item.initialStock = initialStock;
+            if (initialStock > item.initialStock) {
+                item.actualStock = item.actualStock + (initialStock - initial);
+            } else {
+                item.actualStock = item.actualStock - (initial - initialStock);
+            }
+        }
+        if (remito) { item.remito = remito; }
+        if (stock) {
+            const oldStock = item.stock;
+            item.stock = stock;
+            if (stock > oldStock) {
+                initialItem.actualStock = initialItem.actualStock - (stock - oldStock);
+            } else {
+                initialItem.actualStock = initialItem.actualStock + (oldStock - stock);
+            }
+            await itemController.updateItem(initialItem._id, initialItem);
+        }
+        /* if (file) {
             const storageRef = ref(storage, `facturas/${req.file.originalname}`);
             const metadata = {
                 contentType: req.file.mimetype,
@@ -86,9 +104,9 @@ itemRouter.post('/update/:id', upload.single('voucher'), middlewarePassportJWT, 
             const downloadURL = await getDownloadURL(snapshot.ref);
             file.path = downloadURL;
             item.voucher.push(file);
-        }
+        } */
         await itemController.updateItem(id, item);
-        res.redirect('/elementos');
+        res.redirect('back');
     } catch (error) {
         res.status(500).send(error);
     }

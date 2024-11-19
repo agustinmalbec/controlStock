@@ -30,7 +30,7 @@ purchaseRouter.post('/', middlewarePassportJWT, async (req, res) => {
         console.log(purchase);
 
         await purchaseController.addPurchase(purchase);
-        res.redirect('/ordenes');
+        res.redirect('/');
     } catch (error) {
         res.status(500).send(error);
     }
@@ -46,7 +46,7 @@ purchaseRouter.post('/update/:id', middlewarePassportJWT, async (req, res) => {
         const item = await itemController.addItem(it, user);
         order.items.push(item);
         await purchaseController.updatePurchase(id, order);
-        res.redirect('/ordenes');
+        res.redirect('/');
     } catch (error) {
         res.status(500).send(error);
     }
@@ -56,7 +56,7 @@ purchaseRouter.post('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         await purchaseController.deletePurchase(id);
-        res.redirect('/ordenes');
+        res.redirect('/');
     } catch (error) {
         res.status(500).send(error);
     }

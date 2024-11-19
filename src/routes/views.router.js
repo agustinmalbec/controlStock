@@ -101,7 +101,7 @@ viewsRouter.get('/elementos', middlewarePassportJWT, isAdmin, async (req, res) =
     }
 });
 
-viewsRouter.get('/ordenes', async (req, res) => {
+viewsRouter.get('/', async (req, res) => {
     try {
         const { page = 1 } = req.query;
         const limit = 10;
@@ -124,7 +124,6 @@ viewsRouter.get('/carga-inicial/:id', async (req, res) => {
         item.order = order.order;
         const supplierAux = order.items.map(supplier => ({ supplier: supplier.supplier }));
         const supplier = [...new Set(supplierAux.map(JSON.stringify))].map(JSON.parse);
-        console.log(supplier);
 
         res.render('cargaInicial', {
             title: 'Carga inicial',
@@ -150,6 +149,25 @@ viewsRouter.get('/carga-remito/:id', async (req, res) => {
             order: order.order,
             suppliers,
             material
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/materiales-orden/:id', async (req, res) => {
+    try {
+        const order = await purchaseController.getPurchaseById(req.params.id);
+        const itemsOrder = await itemController.getStockItem(order.order);
+        const initialOrder = await itemController.getInitialItem(order.order);
+
+        const item = req.body;
+        item.order = order.order;
+        res.render('materialesOrden', {
+            title: 'Materiales',
+            nOrder: order.order,
+            order: itemsOrder,
+            initialOrder
         });
     } catch (error) {
         res.status(500).send(error);

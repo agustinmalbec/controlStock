@@ -24,7 +24,7 @@ userRouter.post('/authentication', passport.authenticate('login', { failureRedir
                 maxAge: 6000000,
                 httpOnly: true
             }
-        ).redirect('/ordenes');
+        ).redirect('/');
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

@@ -45,6 +45,18 @@ export default class itemService {
         return await this.model.find({ order: order, title: title, supplier: supplier });
     }
 
+    async getInitialItem(order) {
+        return await this.model.find({ order: order, isInitial: true }).lean();
+    }
+
+    async getSingleInitialItem(order, title, supplier) {
+        return await this.model.findOne({ order: order, title: title, supplier: supplier, isInitial: true });
+    }
+
+    async getStockItem(order) {
+        return await this.model.find({ order: order, isInitial: false }).lean();
+    }
+
     async updateItem(id, item) {
         return await this.model.findByIdAndUpdate({ _id: id }, item);
     }

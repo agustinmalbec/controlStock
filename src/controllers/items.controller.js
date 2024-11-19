@@ -54,6 +54,30 @@ class ItemController {
     }
 
 
+    async getInitialItem(order) {
+        try {
+            return await this.controller.getInitialItem(order);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async getSingleInitialItem(order, title, supplier) {
+        try {
+            return await this.controller.getSingleInitialItem(order, title, supplier);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async getStockItem(order) {
+        try {
+            return await this.controller.getStockItem(order);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
     async addItem(item, user) {
         try {
 
@@ -64,8 +88,7 @@ class ItemController {
                 item.isInitial = true;
             }
             if (find.length > 0) {
-                item.actualStock = find[0].actualStock;
-                item.actualStock = item.actualStock - item.stock;
+                item.actualStock = find[0].actualStock - item.stock;
                 for (const element of find) {
                     element.actualStock = item.actualStock;
                     await this.controller.updateItem(element._id, element);

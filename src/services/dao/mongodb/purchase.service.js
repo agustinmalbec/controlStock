@@ -34,7 +34,7 @@ export default class purchaseService {
     }
 
     async getPurchaseById(id) {
-        return await this.model.findById({ _id: id });
+        return await this.model.findById({ _id: id }).lean();
     }
 
     async getPurchaseByOrder(order) {

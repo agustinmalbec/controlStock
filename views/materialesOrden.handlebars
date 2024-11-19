@@ -1,0 +1,168 @@
+<div class="container">
+  <h2>ORDEN {{nOrder}}</h2>
+  <h3>Carga inicial</h3>
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Material</th>
+        <th scope="col">Stock inicial</th>
+        <th scope="col">Restan</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each initialOrder}}
+        <tr>
+          <td>
+            {{supplier}}
+          </td>
+          <td>
+            {{title}}
+          </td>
+          <td>
+            {{initialStock}}
+          </td>
+          <td>
+            {{actualStock}}
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#{{_id}}"
+            >
+              Editar
+            </button>
+            <div
+              class="modal fade"
+              id="{{_id}}"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title fs-5">{{title}}</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/api/items/update/{{_id}}" method="post">
+                      <div class="mb-3">
+                        <label for="initialStock" class="form-label">Stock
+                          inicial</label>
+                        <input
+                          type="number"
+                          name="initialStock"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="col-auto modal-footer">
+                        <button
+                          type="submit"
+                          class="btn btn-primary mb-3"
+                        >Editar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Ingresos</h3>
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Remito</th>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Material</th>
+        <th scope="col">Ingreso</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each order}}
+        <tr>
+          <td>
+            {{remito}}
+          </td>
+          <td>
+            {{supplier}}
+          </td>
+          <td>
+            {{title}}
+          </td>
+          <td>
+            {{stock}}
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#{{_id}}"
+            >
+              Editar
+            </button>
+            <div
+              class="modal fade"
+              id="{{_id}}"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title fs-5">{{title}}</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/api/items/update/{{_id}}" method="post">
+                      <div class="mb-3">
+                        <label for="remito" class="form-label">Remito</label>
+                        <input
+                          type="number"
+                          name="remito"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input
+                          type="number"
+                          name="stock"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="col-auto modal-footer">
+                        <button
+                          type="submit"
+                          class="btn btn-primary mb-3"
+                        >Editar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

@@ -1,16 +1,20 @@
 <div class="container">
   <form method="get" action="/buscar">
     <div class="mb-3">
+      <label for="order" class="form-label">Orden</label>
+      <input type="text" name="order" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="remito" class="form-label">Remito</label>
+      <input type="number" name="remito" class="form-control" />
+    </div>
+    <div class="mb-3">
       <label for="supplier" class="form-label">Proveedor</label>
       <input type="text" name="supplier" class="form-control" />
     </div>
     <div class="mb-3">
       <label for="title" class="form-label">Nombre</label>
       <input type="text" name="title" class="form-control" />
-    </div>
-    <div class="mb-3">
-      <label for="category" class="form-label">Categoria</label>
-      <input type="text" name="category" class="form-control" />
     </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-primary mb-3">Buscar</button>
@@ -29,7 +33,7 @@
           <th scope="col">Material</th>
           <th scope="col">Stock</th>
           <th scope="col">Stock inicial</th>
-          <th scope="col">Editar factura</th>
+          <th scope="col">Editar remito</th>
         </tr>
       </thead>
       <tbody>
