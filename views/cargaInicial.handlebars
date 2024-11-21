@@ -1,4 +1,5 @@
 <div class="container">
+  <h2 class="text-center">CARGA DE LA ORDEN {{order}}</h2>
   <div>
     <form action="/api/items" method="post">
       <div class="mb-3" hidden>
@@ -30,5 +31,31 @@
         <button type="submit" class="btn btn-primary mb-3">Cargar</button>
       </div>
     </form>
+  </div>
+  <div>
+    <table class="table table-striped-columns text-center">
+      <thead>
+        <tr>
+          <th scope="col">Proveedor</th>
+          <th scope="col">Material</th>
+          <th scope="col">Stock inicial</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each initialOrder}}
+          <tr>
+            <td>
+              {{supplier}}
+            </td>
+            <td>
+              {{title}}
+            </td>
+            <td>
+              {{initialStock}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </div>

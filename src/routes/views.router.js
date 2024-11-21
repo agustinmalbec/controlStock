@@ -122,14 +122,14 @@ viewsRouter.get('/', async (req, res) => {
 viewsRouter.get('/carga-inicial/:id', async (req, res) => {
     try {
         const order = await purchaseController.getPurchaseById(req.params.id);
-        const item = req.body;
-        item.order = order.order;
-        const supplierAux = order.items.map(supplier => ({ supplier: supplier.supplier }));
-        const supplier = [...new Set(supplierAux.map(JSON.stringify))].map(JSON.parse);
-
+        //const item = req.body;
+        //item.order = order.order;
+        const initialOrder = await itemController.getInitialItem(order.order);
         res.render('cargaInicial', {
             title: 'Carga inicial',
-            order: order.order
+            order: order.order,
+
+            initialOrder
         });
     } catch (error) {
         res.status(500).send(error);

@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div> 
     <form action="/api/purchases" method="post">
       <div class="mb-3">
         <label for="order" class="form-label">Numero de orden</label>
@@ -27,17 +27,17 @@
         <tr>
           <td>{{order}}</td>
           <td>
-            <button class="btn btn-outline-primary"><a href="/materiales-orden/{{_id}}">Ver orden</a></button>
+            <button class="btn btn-primary"><a href="/materiales-orden/{{_id}}">Ver orden</a></button>
           </td>
           <td>
-            <button class="btn btn-outline-primary"><a href="/carga-remito/{{_id}}">Cargar remito</a></button>
+            <button class="btn btn-primary"><a href="/carga-remito/{{_id}}">Cargar remito</a></button>
           </td>
           <td>
-            <button class="btn btn-outline-primary"><a href="/carga-inicial/{{_id}}">Carga inicial de la orden</a></button>
+            <button class="btn btn-primary"><a href="/carga-inicial/{{_id}}">Carga inicial de la orden</a></button>
           </td>
           <td>
             <form action="/api/purchases/delete/{{_id}}" method="post">
-              <button type="submit" class="btn btn-outline-primary">Eliminar orden</button>
+              <button type="submit" class="btn btn-primary">Eliminar orden</button>
             </form>
           </td>
         </tr>
@@ -47,14 +47,14 @@
     </table>
     <div class="pagination">
       {{#if (gt page 1)}}
-      <a class="page-link" href="/elementos?page={{subtract
+      <a class="page-link" href="/?page={{subtract
           page
           1
         }}">Anterior</a>
       {{/if}}
 
       {{#if (lt page totalPages)}}
-      <a class="page-link" href="/elementos?page={{add
+      <a class="page-link" href="/?page={{add
           page
           1
         }}">Siguiente</a>

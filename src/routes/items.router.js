@@ -114,7 +114,7 @@ itemRouter.post('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         await itemController.deleteItem(id);
-        res.redirect('/elementos');
+        res.redirect('back');
     } catch (error) {
         res.status(500).send(error);
     }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>ORDEN {{nOrder}}</h2>
+  <h2 class="text-center">ORDEN {{nOrder}}</h2>
   <h3>Carga inicial</h3>
   <table class="table table-striped-columns text-center">
     <thead>
@@ -64,12 +64,16 @@
                           class="form-control"
                         />
                       </div>
-                      <div class="col-auto modal-footer">
-                        <button
-                          type="submit"
-                          class="btn btn-primary mb-3"
-                        >Editar</button>
-                      </div>
+                      <button
+                        type="submit"
+                        class="btn btn-primary mb-3"
+                      >Editar</button>
+                    </form>
+                    <form action="/api/items/delete/{{_id}}" method="post">
+                      <button
+                        type="submit"
+                        class="btn btn-primary mb-3"
+                      >Eliminar</button>
                     </form>
                   </div>
                 </div>
@@ -152,12 +156,16 @@
                           class="form-control"
                         />
                       </div>
-                      <div class="col-auto modal-footer">
-                        <button
-                          type="submit"
-                          class="btn btn-primary mb-3"
-                        >Editar</button>
-                      </div>
+                      <button
+                        type="submit"
+                        class="btn btn-primary mb-3"
+                      >Editar</button>
+                    </form>
+                    <form action="/api/items/delete/{{_id}}" method="post">
+                      <button
+                        type="submit"
+                        class="btn btn-primary mb-3"
+                      >Eliminar</button>
                     </form>
                   </div>
                 </div>
