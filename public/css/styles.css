@@ -20,14 +20,18 @@ img {
         visibility: hidden;
     }
 
-    table,
-    table * {
+    .table,
+    .table * {
         visibility: visible;
     }
 
-    table {
+    .table {
         position: absolute;
         left: 0;
         top: 0;
+    }
+    
+    .edit{
+        visibility: hidden;
     }
 }

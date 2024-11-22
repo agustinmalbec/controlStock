@@ -109,8 +109,17 @@ viewsRouter.get('/', async (req, res) => {
         const limit = 10;
         const { data, totalPages, currentPage } = await purchaseController.getPurchases(page, limit);
         const cp = Number(currentPage);
+        for (const element of data) {
+            if (element.items[0]) {
+                element.supplier = element.items[0].supplier;
+            } else {
+                element.supplier = '';
+            }
+        }
+
         res.render('resultados', {
-            title: 'Resultados', orders: data,
+            title: 'Resultados',
+            orders: data,
             page: cp,
             totalPages
         });

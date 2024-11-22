@@ -41,6 +41,9 @@ itemRouter.post('/', middlewarePassportJWT, async (req, res) => {
             order = await purchaseController.addPurchase({ order: it.order });
         }
         const item = await itemController.addItem(it, user);
+        if (item == null) {
+            return res.render('errorDeCarga', { title: 'Error' });
+        }
         order.items.push(item);
         await purchaseController.updatePurchase(order._id, order);
         res.redirect('back');

@@ -1,12 +1,9 @@
-function imprimirTabla(idTabla) {
-    const tablas = document.querySelectorAll(".tablaImprimir");
-    tablas.forEach((tabla) => {
-        tabla.style.visibility = "hidden";
-    });
-    const tablaSeleccionada = document.getElementById(idTabla);
-    tablaSeleccionada.style.visibility = "visible";
-    window.print();
+function imprimirTablas() {
+
+    const tablas = document.querySelectorAll(".table");
     tablas.forEach((tabla) => {
         tabla.style.visibility = "visible";
+        tabla.style.position = 'relative';
     });
+    window.print();
 }

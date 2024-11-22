@@ -1,4 +1,5 @@
 <div class="container">
+  <button onclick="imprimirTablas()" class="btn btn-primary">Imprimir</button>
   <h2 class="text-center">ORDEN {{nOrder}}</h2>
   <h3>Carga inicial</h3>
   <table class="table table-striped-columns text-center">
@@ -8,7 +9,7 @@
         <th scope="col">Material</th>
         <th scope="col">Stock inicial</th>
         <th scope="col">Restan</th>
-        <th scope="col">Editar</th>
+        <th scope="col" class="edit">Editar</th>
       </tr>
     </thead>
     <tbody>
@@ -26,10 +27,10 @@
           <td>
             {{actualStock}}
           </td>
-          <td>
+          <td class="edit">
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary edit"
               data-bs-toggle="modal"
               data-bs-target="#{{_id}}"
             >
@@ -92,7 +93,7 @@
         <th scope="col">Proveedor</th>
         <th scope="col">Material</th>
         <th scope="col">Ingreso</th>
-        <th scope="col">Editar</th>
+        <th scope="col" class="edit">Editar</th>
       </tr>
     </thead>
     <tbody>
@@ -113,7 +114,7 @@
           <td>
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary edit"
               data-bs-toggle="modal"
               data-bs-target="#{{_id}}"
             >

@@ -1,5 +1,6 @@
 import { itemService } from "../services/service.js";
 import changesController from "./changes.controller.js";
+import purchaseController from "./purchase.controller.js";
 
 class ItemController {
     constructor() {
@@ -92,6 +93,11 @@ class ItemController {
                 item.isInitial = true;
             }
             if (find.length > 0) {
+                for (const element of find) {
+                    if (item.title == element.title && item.remito == element.remito) {
+                        return null;
+                    }
+                }
                 item.actualStock = find[0].actualStock - item.stock;
                 for (const element of find) {
                     element.actualStock = item.actualStock;
@@ -117,6 +123,10 @@ class ItemController {
 
     async deleteItem(id) {
         try {
+            const item = await this.controller.getItemById(id);
+            const find = await this.controller.getItem(item.order, item.title, item.supplier);
+            find[0].actualStock = find[0].actualStock + item.stock;
+            await this.controller.updateItem(find[0]._id, find[0]);
             return await this.controller.deleteItem(id);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
