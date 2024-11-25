@@ -1,9 +1,6 @@
-function imprimirTablas() {
-
-    const tablas = document.querySelectorAll(".table");
-    tablas.forEach((tabla) => {
-        tabla.style.visibility = "visible";
-        tabla.style.position = 'relative';
-    });
+function imprimirTablas(idTabla) {
+    const tabla = document.getElementById(idTabla);
+    tabla.removeAttribute("hidden");
     window.print();
+    tabla.setAttribute("hidden", "hidden");
 }

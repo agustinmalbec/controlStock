@@ -1,7 +1,10 @@
 <div class="container">
-  <button onclick="imprimirTablas()" class="btn btn-primary">Imprimir</button>
   <h2 class="text-center">ORDEN {{nOrder}}</h2>
   <h3>Carga inicial</h3>
+  <button
+    onclick="imprimirTablas('initialOrder')"
+    class="btn btn-primary"
+  >Imprimir</button>
   <table class="table table-striped-columns text-center">
     <thead>
       <tr>
@@ -9,7 +12,7 @@
         <th scope="col">Material</th>
         <th scope="col">Stock inicial</th>
         <th scope="col">Restan</th>
-        <th scope="col" class="edit">Editar</th>
+        <th scope="col">Editar</th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +30,7 @@
           <td>
             {{actualStock}}
           </td>
-          <td class="edit">
+          <td>
             <button
               type="button"
               class="btn btn-primary edit"
@@ -85,7 +88,39 @@
       {{/each}}
     </tbody>
   </table>
+  <table id="initialOrder" class="table text-center tablaImprimir" hidden>
+    <thead>
+      <tr>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Material</th>
+        <th scope="col">Stock inicial</th>
+        <th scope="col">Restan</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each initialOrder}}
+        <tr>
+          <td>
+            {{supplier}}
+          </td>
+          <td>
+            {{title}}
+          </td>
+          <td>
+            {{initialStock}}
+          </td>
+          <td>
+            {{actualStock}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
   <h3>Ingresos</h3>
+  <button
+    onclick="imprimirTablas('remitos')"
+    class="btn btn-primary"
+  >Imprimir</button>
   <table class="table table-striped-columns text-center">
     <thead>
       <tr>
@@ -93,7 +128,7 @@
         <th scope="col">Proveedor</th>
         <th scope="col">Material</th>
         <th scope="col">Ingreso</th>
-        <th scope="col" class="edit">Editar</th>
+        <th scope="col">Editar</th>
       </tr>
     </thead>
     <tbody>
@@ -172,6 +207,34 @@
                 </div>
               </div>
             </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <table id="remitos" class="table text-center tablaImprimir" hidden>
+    <thead>
+      <tr>
+        <th scope="col">Remito</th>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Material</th>
+        <th scope="col">Ingreso</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each order}}
+        <tr>
+          <td>
+            {{remito}}
+          </td>
+          <td>
+            {{supplier}}
+          </td>
+          <td>
+            {{title}}
+          </td>
+          <td>
+            {{stock}}
           </td>
         </tr>
       {{/each}}

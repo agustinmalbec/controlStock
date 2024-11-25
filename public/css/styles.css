@@ -22,16 +22,18 @@ img {
 
     .table,
     .table * {
+        visibility: hidden;
+    }
+
+    .tablaImprimir,
+    .tablaImprimir * {
         visibility: visible;
     }
 
-    .table {
+    .tablaImprimir {
         position: absolute;
         left: 0;
         top: 0;
-    }
-    
-    .edit{
-        visibility: hidden;
+        width: 100%;
     }
 }
