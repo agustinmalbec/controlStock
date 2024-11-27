@@ -1,4 +1,5 @@
 import { purchaseService } from "../services/service.js";
+import itemController from "./items.controller.js";
 
 class PurchaseController {
     constructor() {
@@ -62,6 +63,13 @@ class PurchaseController {
 
     async deletePurchase(id) {
         try {
+            const order = await this.controller.getPurchaseById(id);
+            const items = await itemController.getItemsByOrder(order.order);
+            if (items.length > 0) {
+                for (const element of items) {
+                    await itemController.deleteItem(element._id);
+                }
+            }
             return await this.controller.deletePurchase(id);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);

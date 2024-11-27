@@ -15,6 +15,14 @@ class ItemController {
         }
     }
 
+    async getItemsByOrder(order) {
+        try {
+            return await this.controller.getItemsByOrder(order);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
     async searchItems(item, page, limit) {
         try {
             const { order, remito, supplier, title, type } = item;

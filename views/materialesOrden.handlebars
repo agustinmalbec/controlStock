@@ -1,5 +1,15 @@
 <div class="container">
-  <h2 class="text-center">ORDEN {{nOrder}}</h2>
+
+  <div class="d-flex justify-content-evenly">
+    <h2 class="text-center">ORDEN {{nOrder}}</h2>
+    <button class="btn btn-primary"><a href="/carga-remito/{{_id}}">Cargar
+        remito</a></button>
+    <button class="btn btn-primary"><a href="/carga-inicial/{{_id}}">Carga
+        inicial de la orden</a></button>
+    <form action="/api/purchases/delete/{{_id}}" method="post">
+      <button type="submit" class="btn btn-primary">Eliminar orden</button>
+    </form>
+  </div>
   <h3>Carga inicial</h3>
   <button
     onclick="imprimirTablas('initialOrder')"

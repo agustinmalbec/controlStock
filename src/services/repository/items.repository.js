@@ -9,6 +9,10 @@ export default class ItemRepository {
         return await this.service.getItems(page, limit);
     }
 
+    async getItemsByOrder(order) {
+        return await this.service.getItemsByOrder(order);
+    }
+
     async addItem(item) {
         //const newItem = new ItemDTO(Item);
         return await this.service.addItem(item);

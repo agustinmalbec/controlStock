@@ -106,7 +106,7 @@ viewsRouter.get('/elementos', middlewarePassportJWT, isAdmin, async (req, res) =
 viewsRouter.get('/', async (req, res) => {
     try {
         const { page = 1 } = req.query;
-        const limit = 10;
+        const limit = 20;
         const { data, totalPages, currentPage } = await purchaseController.getPurchases(page, limit);
         const cp = Number(currentPage);
         for (const element of data) {
@@ -178,7 +178,8 @@ viewsRouter.get('/materiales-orden/:id', async (req, res) => {
             title: 'Materiales',
             nOrder: order.order,
             order: itemsOrder,
-            initialOrder
+            initialOrder,
+            _id: req.params.id
         });
     } catch (error) {
         res.status(500).send(error);

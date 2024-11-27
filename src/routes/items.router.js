@@ -21,6 +21,19 @@ itemRouter.get('/', async (req, res) => {
     }
 });
 
+itemRouter.get('/order', async (req, res) => {
+    try {
+        const { order } = req.query;
+
+        const items = await itemController.getItemsByOrder(order);
+        console.log(items);
+
+        res.send(items);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 itemRouter.post('/search', async (req, res) => {
     try {
         const item = req.body;

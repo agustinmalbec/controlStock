@@ -34,7 +34,7 @@ purchaseRouter.post('/', middlewarePassportJWT, async (req, res) => {
     }
 });
 
-purchaseRouter.post('/update/:id', middlewarePassportJWT, async (req, res) => {
+purchaseRouter.post('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const user = req.user;

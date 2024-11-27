@@ -5,7 +5,7 @@ export default class itemService {
         this.model = itemModel;
     }
 
-    async getItems(page = 1, limit = 10) {
+    async getItems(page = 1, limit) {
         const skip = (page - 1) * limit;
         const data = await this.model.find().skip(skip).limit(limit).lean();
         const totalPosts = await this.model.countDocuments();
@@ -17,11 +17,15 @@ export default class itemService {
         };
     }
 
+    async getItemsByOrder(order) {
+        return await this.model.find({ order: order });
+    }
+
     async addItem(item) {
         return await this.model.create(item);
     }
 
-    async searchItems(item, page = 1, limit = 10) {
+    async searchItems(item, page = 1, limit) {
         const skip = (page - 1) * limit;
         const data = await this.model.find(item).skip(skip).limit(limit).lean();
         const totalPosts = await this.model.countDocuments();
