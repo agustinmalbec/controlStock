@@ -2,32 +2,14 @@ import { Router } from "express";
 import itemController from "../controllers/items.controller.js";
 import changesController from "../controllers/changes.controller.js";
 import { middlewarePassportJWT } from "../middleware/jwt.middleware.js";
-import { upload } from "../middleware/multer.middleware.js";
-import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import initialize from '../utils/firebase.js';
 import purchaseController from "../controllers/purchase.controller.js";
 
-initialize;
-const storage = getStorage();
 
 const itemRouter = Router();
 
 itemRouter.get('/', async (req, res) => {
     try {
         const items = await itemController.getItems();
-        res.send(items);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-});
-
-itemRouter.get('/order', async (req, res) => {
-    try {
-        const { order } = req.query;
-
-        const items = await itemController.getItemsByOrder(order);
-        console.log(items);
-
         res.send(items);
     } catch (error) {
         res.status(500).send(error);
@@ -82,7 +64,7 @@ itemRouter.post('/:id', middlewarePassportJWT, async (req, res) => {
     }
 });
 
-itemRouter.post('/update/:id', /* upload.single('voucher'), */ middlewarePassportJWT, async (req, res) => {
+itemRouter.post('/update/:id', middlewarePassportJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const { initialStock, remito, stock } = req.body;
@@ -109,16 +91,6 @@ itemRouter.post('/update/:id', /* upload.single('voucher'), */ middlewarePasspor
             }
             await itemController.updateItem(initialItem._id, initialItem);
         }
-        /* if (file) {
-            const storageRef = ref(storage, `facturas/${req.file.originalname}`);
-            const metadata = {
-                contentType: req.file.mimetype,
-            };
-            const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
-            const downloadURL = await getDownloadURL(snapshot.ref);
-            file.path = downloadURL;
-            item.voucher.push(file);
-        } */
         await itemController.updateItem(id, item);
         res.redirect('back');
     } catch (error) {

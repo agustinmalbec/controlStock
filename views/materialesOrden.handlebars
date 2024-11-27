@@ -2,13 +2,45 @@
 
   <div class="d-flex justify-content-evenly">
     <h2 class="text-center">ORDEN {{nOrder}}</h2>
+    <button
+      type="button"
+      class="btn btn-primary edit"
+      data-bs-toggle="modal"
+      data-bs-target="#order"
+    >
+      Editar orden
+    </button>
+    <div class="modal fade" id="order" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title fs-5">Editar orden</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form action="/api/purchases/updateNumber/{{_id}}" method="post">
+              <div class="mb-3">
+                <label for="order" class="form-label">Numero de orden</label>
+                <input type="text" name="order" class="form-control" />
+              </div>
+              <button type="submit" class="btn btn-primary mb-3">Editar orden</button>
+            </form>
+            <form action="/api/purchases/delete/{{_id}}" method="post">
+              <button type="submit" class="btn btn-primary mb-3">Eliminar orden</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <button class="btn btn-primary"><a href="/carga-remito/{{_id}}">Cargar
         remito</a></button>
     <button class="btn btn-primary"><a href="/carga-inicial/{{_id}}">Carga
         inicial de la orden</a></button>
-    <form action="/api/purchases/delete/{{_id}}" method="post">
-      <button type="submit" class="btn btn-primary">Eliminar orden</button>
-    </form>
   </div>
   <h3>Carga inicial</h3>
   <button
