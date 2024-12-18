@@ -10,43 +10,48 @@
       </div>
     </form>
   </div>
+  <div>
+    <button class="btn btn-primary mb-3" onclick="imprimirTablas('orders')">Imprimir ordenes</button>
+     {{#each initialOrders}}
+    <table  class="table text-center tablaImprimir orders" hidden>
+    <thead>
+      <tr>
+        <th>{{order}}</th>
+      </tr>
+      <tr>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Material</th>
+        <th scope="col">Stock inicial</th>
+        <th scope="col">Restan</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each items}}
+        <tr>
+          <td>
+            {{supplier}}
+          </td>
+          <td>
+            {{title}}
+          </td>
+          <td>
+            {{initialStock}}
+          </td>
+          <td>
+            {{actualStock}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+    {{/each}}
+  </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {{#each orders}}
     <div class="card h-100">
       <a href="/materiales-orden/{{_id}}">N°: {{order}} <br> Proveedor: {{supplier}}</a>
     </div>
     {{/each}}
-    {{!-- <table class="table table-striped-columns text-center">
-      <thead>
-        <tr>
-          <th scope="col">Numero de orden y proveedor</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-      <tbody>
-        {{#each orders}}
-        <tr>
-          <td><a href="/materiales-orden/{{_id}}">N°: {{order}} <br> Proveedor: {{supplier}}</a>
-          </td>
-          <td>
-            <button class="btn btn-primary"><a href="/carga-remito/{{_id}}">Cargar remito</a></button>
-          </td>
-          <td>
-            <button class="btn btn-primary"><a href="/carga-inicial/{{_id}}">Carga inicial de la orden</a></button>
-          </td>
-          <td>
-            <form action="/api/purchases/delete/{{_id}}" method="post">
-              <button type="submit" class="btn btn-primary">Eliminar orden</button>
-            </form>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-      </tbody>
-    </table> --}}
     <div class="pagination">
       {{#if (gt page 1)}}
       <a class="page-link" href="/?page={{subtract

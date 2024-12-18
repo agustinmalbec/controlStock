@@ -17,6 +17,10 @@ export default class purchaseService {
         };
     }
 
+    async getAllPurchases() {
+        return await this.model.find().populate('items').lean();
+    }
+
     async addPurchase(purchase) {
         return await this.model.create(purchase);
     }

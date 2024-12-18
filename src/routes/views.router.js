@@ -103,7 +103,7 @@ viewsRouter.get('/elementos', middlewarePassportJWT, isAdmin, async (req, res) =
     }
 });
 
-viewsRouter.get('/', async (req, res) => {
+viewsRouter.get('/', middlewarePassportJWT, isAdmin, async (req, res) => {
     try {
         const { page = 1 } = req.query;
         const limit = 20;
@@ -116,10 +116,12 @@ viewsRouter.get('/', async (req, res) => {
                 element.supplier = '';
             }
         }
+        const initialOrders = await purchaseController.getInitialPurchases();
 
         res.render('resultados', {
             title: 'Resultados',
             orders: data,
+            initialOrders,
             page: cp,
             totalPages
         });
@@ -128,7 +130,7 @@ viewsRouter.get('/', async (req, res) => {
     }
 });
 
-viewsRouter.get('/carga-inicial/:id', async (req, res) => {
+viewsRouter.get('/carga-inicial/:id', middlewarePassportJWT, isAdmin, async (req, res) => {
     try {
         const order = await purchaseController.getPurchaseById(req.params.id);
         //const item = req.body;
@@ -145,7 +147,7 @@ viewsRouter.get('/carga-inicial/:id', async (req, res) => {
     }
 });
 
-viewsRouter.get('/carga-remito/:id', async (req, res) => {
+viewsRouter.get('/carga-remito/:id', middlewarePassportJWT, isAdmin, async (req, res) => {
     try {
         const order = await purchaseController.getPurchaseById(req.params.id);
         const item = req.body;
@@ -166,7 +168,7 @@ viewsRouter.get('/carga-remito/:id', async (req, res) => {
     }
 });
 
-viewsRouter.get('/materiales-orden/:id', async (req, res) => {
+viewsRouter.get('/materiales-orden/:id', middlewarePassportJWT, isAdmin, async (req, res) => {
     try {
         const order = await purchaseController.getPurchaseById(req.params.id);
         const itemsOrder = await itemController.getStockItem(order.order);

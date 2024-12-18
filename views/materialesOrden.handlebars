@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="d-flex justify-content-evenly">
     <h2 class="text-center">ORDEN {{nOrder}}</h2>
     <button
@@ -132,6 +131,7 @@
   </table>
   <table id="initialOrder" class="table text-center tablaImprimir" hidden>
     <thead>
+      <tr><th>Orden: {{nOrder}}</th></tr>
       <tr>
         <th scope="col">Proveedor</th>
         <th scope="col">Material</th>
@@ -256,6 +256,7 @@
   </table>
   <table id="remitos" class="table text-center tablaImprimir" hidden>
     <thead>
+      <tr><th>Orden: {{nOrder}}</th></tr>
       <tr>
         <th scope="col">Remito</th>
         <th scope="col">Proveedor</th>

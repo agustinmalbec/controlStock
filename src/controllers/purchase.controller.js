@@ -14,6 +14,28 @@ class PurchaseController {
         }
     }
 
+    async getAllPurchases() {
+        try {
+            return await this.controller.getAllPurchases();
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async getInitialPurchases() {
+        try {
+            const initialOrders = [];
+            const orders = await this.controller.getAllPurchases();
+            for (const element of orders) {
+                element.items = await itemController.getInitialItem(element.order);
+                initialOrders.push(element);
+            }
+            return initialOrders;
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
     async searchPurchase(purchase, page, limit) {
         try {
             const { supplier, title, description, category } = purchase;
