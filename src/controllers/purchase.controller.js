@@ -77,6 +77,9 @@ class PurchaseController {
 
     async updatePurchase(id, update) {
         try {
+            const order = await this.controller.getPurchaseById(id);
+            const stock = await itemController.controlStock(order.order);
+            stock == true ? update.status = true : update.status = false;
             return await this.controller.updatePurchase(id, update);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);

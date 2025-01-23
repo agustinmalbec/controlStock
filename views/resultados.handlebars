@@ -5,6 +5,10 @@
         <label for="order" class="form-label">Numero de orden</label>
         <input type="text" name="order" class="form-control" required />
       </div>
+      <div class="mb-3">
+        <label for="place" class="form-label">Obra</label>
+        <input type="text" name="place" class="form-control" required />
+      </div>
       <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">Cargar orden nueva</button>
       </div>
@@ -48,8 +52,8 @@
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {{#each orders}}
-    <div class="card h-100">
-      <a href="/materiales-orden/{{_id}}">N°: {{order}} <br> Proveedor: {{supplier}}</a>
+    <div class="card h-100 order {{#if status}}empty-order{{/if}}">
+      <a href="/materiales-orden/{{_id}}" >N°: {{order}} <br> Proveedor: {{supplier}} <br> Obra: {{place}}</a>
     </div>
     {{/each}}
     <div class="pagination">

@@ -43,3 +43,7 @@ img {
         width: 100%;
     }
 }
+
+.empty-order{
+    background-color: red;
+}

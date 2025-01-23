@@ -19,8 +19,8 @@ const viewsRouter = Router();
 }); */
 
 viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
-    const { page = 1, order, remito, supplier, title, type } = req.query;
-    const item = { order, remito, supplier, title, type };
+    const { page = 1, order, place, remito, supplier, title, type } = req.query;
+    const item = { order, place, remito, supplier, title, type };
     const limit = 10;
     try {
         const { data, totalPages, currentPage } = await itemController.searchItems(item, page, limit);
@@ -31,6 +31,7 @@ viewsRouter.get('/buscar', middlewarePassportJWT, isAuth, async (req, res) => {
             page: cp,
             totalPages,
             order,
+            place,
             remito,
             supplier,
             title,
@@ -160,6 +161,7 @@ viewsRouter.get('/carga-remito/:id', middlewarePassportJWT, isAdmin, async (req,
         res.render('carga', {
             title: 'Cargar remito',
             order: order.order,
+            place: order.place,
             suppliers,
             material
         });
@@ -179,6 +181,7 @@ viewsRouter.get('/materiales-orden/:id', middlewarePassportJWT, isAdmin, async (
         res.render('materialesOrden', {
             title: 'Materiales',
             nOrder: order.order,
+            place: order.place,
             order: itemsOrder,
             initialOrder,
             _id: req.params.id

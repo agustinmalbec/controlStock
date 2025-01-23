@@ -53,17 +53,29 @@ purchaseRouter.post('/update/:id', async (req, res) => {
 purchaseRouter.post('/updateNumber/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const { order } = req.body;
-
-        const oldOrder = await purchaseController.getPurchaseById(id);
-        const items = await itemController.getItemsByOrder(oldOrder.order);
-        for (const element of items) {
-            const item = await itemController.getItemById(element._id);
-            item.order = order;
-            await itemController.updateItem(item._id, item);
+        const { order, place } = req.body;
+        if (place) {
+            const oldOrder = await purchaseController.getPurchaseById(id);
+            const items = await itemController.getItemsByOrder(oldOrder.order);
+            for (const element of items) {
+                const item = await itemController.getItemById(element._id);
+                item.place = place;
+                await itemController.updateItem(item._id, item);
+            }
+            oldOrder.place = place;
+            await purchaseController.updatePurchase(id, oldOrder);
         }
-        oldOrder.order = order;
-        await purchaseController.updatePurchase(id, oldOrder);
+        if (order) {
+            const oldOrder = await purchaseController.getPurchaseById(id);
+            const items = await itemController.getItemsByOrder(oldOrder.order);
+            for (const element of items) {
+                const item = await itemController.getItemById(element._id);
+                item.order = order;
+                await itemController.updateItem(item._id, item);
+            }
+            oldOrder.order = order;
+            await purchaseController.updatePurchase(id, oldOrder);
+        }
         res.redirect('/');
     } catch (error) {
         res.status(500).send(error);

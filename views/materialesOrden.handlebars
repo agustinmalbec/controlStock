@@ -1,6 +1,6 @@
 <div class="container">
   <div class="d-flex justify-content-evenly">
-    <h2 class="text-center">ORDEN {{nOrder}}</h2>
+    <h2 class="text-center">ORDEN {{nOrder}} <br /> OBRA {{place}}</h2>
     <button
       type="button"
       class="btn btn-primary edit"
@@ -26,6 +26,10 @@
               <div class="mb-3">
                 <label for="order" class="form-label">Numero de orden</label>
                 <input type="text" name="order" class="form-control" />
+              </div>
+              <div class="mb-3">
+                <label for="place" class="form-label">Obra</label>
+                <input type="text" name="place" class="form-control" />
               </div>
               <button type="submit" class="btn btn-primary mb-3">Editar orden</button>
             </form>

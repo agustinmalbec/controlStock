@@ -1,3 +1,4 @@
+import itemModel from "../services/models/items.model.js";
 import { itemService } from "../services/service.js";
 import changesController from "./changes.controller.js";
 import purchaseController from "./purchase.controller.js";
@@ -25,9 +26,10 @@ class ItemController {
 
     async searchItems(item, page, limit) {
         try {
-            const { order, remito, supplier, title, type } = item;
+            const { order, place, remito, supplier, title, type } = item;
             const search = {};
             if (order) search.order = order;
+            if (place) search.place = place;
             if (remito) search.remito = remito;
             if (supplier) search.supplier = supplier;
             if (title) search.title = { $regex: title, $options: 'i' };
@@ -115,6 +117,7 @@ class ItemController {
 
             const added = await this.controller.addItem(item);
             await changesController.addChange(user, description, added);
+            await this.controlStock(item.order);
             return added;
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
@@ -124,6 +127,23 @@ class ItemController {
     async updateItem(id, update) {
         try {
             return await this.controller.updateItem(id, update);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async controlStock(order) {
+        try {
+            const items = await this.controller.getInitialItem(order);
+            let count = 0;
+            for (const element of items) {
+                if (element.actualStock == 0) {
+                    count++;
+                }
+            }
+            if (count == items.length) {
+                return true;
+            }
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
         }

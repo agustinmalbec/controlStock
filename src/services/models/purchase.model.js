@@ -6,6 +6,11 @@ const purchaseSchema = new Schema({
         required: true,
         unique: true
     },
+    place: String,
+    status: {
+        type: Boolean,
+        default: false
+    },
     items: [{ type: Schema.Types.ObjectId, ref: 'items' }],
 });
 
