@@ -116,7 +116,7 @@ class ItemController {
             }
 
             const added = await this.controller.addItem(item);
-            await changesController.addChange(user, description, added);
+            //await changesController.addChange(user, description, added);
             await this.controlStock(item.order);
             return added;
         } catch (error) {

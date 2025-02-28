@@ -140,7 +140,7 @@ viewsRouter.get('/carga-inicial/:id', middlewarePassportJWT, isAdmin, async (req
         res.render('cargaInicial', {
             title: 'Carga inicial',
             order: order.order,
-
+            orderId: req.params.id,
             initialOrder
         });
     } catch (error) {
@@ -163,7 +163,8 @@ viewsRouter.get('/carga-remito/:id', middlewarePassportJWT, isAdmin, async (req,
             order: order.order,
             place: order.place,
             suppliers,
-            material
+            material,
+            orderId: req.params.id
         });
     } catch (error) {
         res.status(500).send(error);

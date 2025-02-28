@@ -1,4 +1,7 @@
 <div class="container">
+  <button class="btn btn-primary mb-3"><a
+      href="/materiales-orden/{{orderId}}"
+    >Volver a la orden {{order}}</a></button>
   <h2 class="text-center">CARGA DE LA ORDEN {{order}}</h2>
   <div>
     <form action="/api/items" method="post">
