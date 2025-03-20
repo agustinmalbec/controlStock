@@ -82,6 +82,16 @@ purchaseRouter.post('/updateNumber/:id', async (req, res) => {
     }
 });
 
+purchaseRouter.post('/close/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await purchaseController.closePurchase(id);
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 purchaseRouter.post('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;

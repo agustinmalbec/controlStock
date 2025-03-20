@@ -17,6 +17,37 @@ export default class purchaseService {
         };
     }
 
+    async getDonePurchases(page = 1, limit = 10) {
+        const skip = (page - 1) * limit;
+        const data = await this.model.find({ status: true }).skip(skip).limit(limit).populate('items').lean();
+        const totalPosts = await this.model.countDocuments();
+        const totalPages = Math.ceil(totalPosts / limit);
+        return {
+            data,
+            totalPages,
+            currentPage: page,
+        };
+    }
+
+    async getOpenPurchases(page = 1, limit = 10) {
+        const skip = (page - 1) * limit;
+        const status = {
+            $or: [
+                { status: false },
+                { status: { $exists: false } }
+            ]
+        };
+
+        const data = await this.model.find(status).skip(skip).limit(limit).populate('items').lean();
+        const totalPosts = await this.model.countDocuments();
+        const totalPages = Math.ceil(totalPosts / limit);
+        return {
+            data,
+            totalPages,
+            currentPage: page,
+        };
+    }
+
     async getAllPurchases() {
         return await this.model.find().populate('items').lean();
     }

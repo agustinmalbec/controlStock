@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {{#each orders}}
+    <div class="card h-100 order {{#if status}}empty-order{{/if}}">
+      <a href="/materiales-orden/{{_id}}" >N°: {{order}} <br> Proveedor: {{supplier}} <br> Obra: {{place}}</a>
+    </div>
+    {{/each}}
+    <div class="pagination">
+      {{#if (gt page 1)}}
+      <a class="page-link" href="/ordenes-cerradas?page={{subtract
+          page
+          1
+        }}">Anterior</a>
+      {{/if}}
+
+      {{#if (lt page totalPages)}}
+      <a class="page-link" href="/ordenes-cerradas?page={{add
+          page
+          1
+        }}">Siguiente</a>
+      {{/if}}
+    </div>
+  </div>

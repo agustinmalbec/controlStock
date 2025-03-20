@@ -14,42 +14,7 @@
       </div>
     </form>
   </div>
-  <div>
-    <button class="btn btn-primary mb-3" onclick="imprimirTablas('orders')">Imprimir ordenes</button>
-     {{#each initialOrders}}
-    <table  class="table text-center tablaImprimir orders" hidden>
-    <thead>
-      <tr>
-        <th>{{order}}</th>
-      </tr>
-      <tr>
-        <th scope="col">Proveedor</th>
-        <th scope="col">Material</th>
-        <th scope="col">Stock inicial</th>
-        <th scope="col">Restan</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each items}}
-        <tr>
-          <td>
-            {{supplier}}
-          </td>
-          <td>
-            {{title}}
-          </td>
-          <td>
-            {{initialStock}}
-          </td>
-          <td>
-            {{actualStock}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-    {{/each}}
-  </div>
+  
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {{#each orders}}
     <div class="card h-100 order {{#if status}}empty-order{{/if}}">

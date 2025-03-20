@@ -108,7 +108,7 @@ viewsRouter.get('/', middlewarePassportJWT, isAdmin, async (req, res) => {
     try {
         const { page = 1 } = req.query;
         const limit = 20;
-        const { data, totalPages, currentPage } = await purchaseController.getPurchases(page, limit);
+        const { data, totalPages, currentPage } = await purchaseController.getOpenPurchases(page, limit);
         const cp = Number(currentPage);
         for (const element of data) {
             if (element.items[0]) {
@@ -117,14 +117,50 @@ viewsRouter.get('/', middlewarePassportJWT, isAdmin, async (req, res) => {
                 element.supplier = '';
             }
         }
-        const initialOrders = await purchaseController.getInitialPurchases();
 
         res.render('resultados', {
             title: 'Resultados',
             orders: data,
-            initialOrders,
             page: cp,
             totalPages
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/ordenes-cerradas', middlewarePassportJWT, isAdmin, async (req, res) => {
+    try {
+        const { page = 1 } = req.query;
+        const limit = 20;
+        const { data, totalPages, currentPage } = await purchaseController.getDonePurchases(page, limit);
+        const cp = Number(currentPage);
+        for (const element of data) {
+            if (element.items[0]) {
+                element.supplier = element.items[0].supplier;
+            } else {
+                element.supplier = '';
+            }
+        }
+
+        res.render('ordenesCerradas', {
+            title: 'Ordenes cerradas',
+            orders: data,
+            page: cp,
+            totalPages
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+viewsRouter.get('/imprimir-ordenes', middlewarePassportJWT, isAdmin, async (req, res) => {
+    try {
+        const initialOrders = await purchaseController.getInitialPurchases();
+
+        res.render('imprimirOrdenes', {
+            title: 'Imprimir ordenes',
+            initialOrders
         });
     } catch (error) {
         res.status(500).send(error);

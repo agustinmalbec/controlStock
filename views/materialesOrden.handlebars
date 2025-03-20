@@ -33,6 +33,9 @@
               </div>
               <button type="submit" class="btn btn-primary mb-3">Editar orden</button>
             </form>
+            <form action="/api/purchases/close/{{_id}}" method="post">
+              <button type="submit" class="btn btn-primary mb-3">Cerrar orden</button>
+            </form>
             <form action="/api/purchases/delete/{{_id}}" method="post">
               <button type="submit" class="btn btn-primary mb-3">Eliminar orden</button>
             </form>

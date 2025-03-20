@@ -7,6 +7,14 @@ export default class PurchaseRepository {
         return await this.service.getPurchases(page, limit);
     }
 
+    async getDonePurchases(page, limit) {
+        return await this.service.getDonePurchases(page, limit);
+    }
+
+    async getOpenPurchases(page, limit) {
+        return await this.service.getOpenPurchases(page, limit);
+    }
+
     async getAllPurchases() {
         return await this.service.getAllPurchases();
     }

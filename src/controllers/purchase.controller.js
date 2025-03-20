@@ -14,6 +14,22 @@ class PurchaseController {
         }
     }
 
+    async getDonePurchases(page, limit) {
+        try {
+            return await this.controller.getDonePurchases(page, limit);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async getOpenPurchases(page, limit) {
+        try {
+            return await this.controller.getOpenPurchases(page, limit);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
     async getAllPurchases() {
         try {
             return await this.controller.getAllPurchases();
@@ -80,6 +96,17 @@ class PurchaseController {
             const order = await this.controller.getPurchaseById(id);
             const stock = await itemController.controlStock(order.order);
             stock == true ? update.status = true : update.status = false;
+            return await this.controller.updatePurchase(id, update);
+        } catch (error) {
+            console.log(`Ha ocurrido un error: ${error}`);
+        }
+    }
+
+    async closePurchase(id) {
+        try {
+            const order = await this.controller.getPurchaseById(id);
+            order.status = true;
+            const update = order;
             return await this.controller.updatePurchase(id, update);
         } catch (error) {
             console.log(`Ha ocurrido un error: ${error}`);
